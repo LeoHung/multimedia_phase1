@@ -1,0 +1,195 @@
+LOG:  database system was shut down at 2014-10-06 18:35:02 EDT
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  table "gm_table" does not exist
+STATEMENT:  DROP TABLE GM_TABLE
+ERROR:  table "gm_table_undirected" does not exist
+STATEMENT:  DROP TABLE GM_TABLE_UNDIRECTED
+ERROR:  table "gm_nodes" does not exist
+STATEMENT:  DROP TABLE GM_NODES
+ERROR:  table "gm_node_degrees" does not exist
+STATEMENT:  DROP TABLE GM_NODE_DEGREES
+ERROR:  table "gm_degree_distribution" does not exist
+STATEMENT:  DROP TABLE GM_DEGREE_DISTRIBUTION
+ERROR:  table "gm_indegree_distribution" does not exist
+STATEMENT:  DROP TABLE GM_INDEGREE_DISTRIBUTION
+ERROR:  table "gm_outdegree_distribution" does not exist
+STATEMENT:  DROP TABLE GM_OUTDEGREE_DISTRIBUTION
+ERROR:  table "gm_pr_norm" does not exist
+STATEMENT:  DROP TABLE GM_PR_NORM
+ERROR:  table "gm_pagerank" does not exist
+STATEMENT:  DROP TABLE GM_PAGERANK
+ERROR:  table "gm_pr_offset" does not exist
+STATEMENT:  DROP TABLE GM_PR_OFFSET
+ERROR:  table "gm_pr_next" does not exist
+STATEMENT:  DROP TABLE GM_PR_NEXT
+ERROR:  table "gm_con_comp" does not exist
+STATEMENT:  DROP TABLE GM_CON_COMP
+ERROR:  table "gm_cc_temp" does not exist
+STATEMENT:  DROP TABLE GM_CC_TEMP
+ERROR:  table "gm_eg_basis_vect1" does not exist
+STATEMENT:  DROP TABLE GM_EG_BASIS_VECT1
+ERROR:  table "gm_eg_basis_vect0" does not exist
+STATEMENT:  DROP TABLE GM_EG_BASIS_VECT0
+ERROR:  table "gm_eg_basis" does not exist
+STATEMENT:  DROP TABLE GM_EG_BASIS
+ERROR:  table "gm_eg_tridiagonal" does not exist
+STATEMENT:  DROP TABLE GM_EG_TRIDIAGONAL
+ERROR:  table "gm_eg_basis_vect_next" does not exist
+STATEMENT:  DROP TABLE GM_EG_BASIS_VECT_NEXT
+ERROR:  table "gm_eg_temp_vect" does not exist
+STATEMENT:  DROP TABLE GM_EG_TEMP_VECT
+ERROR:  table "gm_eg_diag" does not exist
+STATEMENT:  DROP TABLE GM_EG_DIAG
+ERROR:  table "gm_eg_vec" does not exist
+STATEMENT:  DROP TABLE GM_EG_VEC
+ERROR:  table "gm_qr_decompose_identity" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_IDENTITY
+ERROR:  table "gm_qr_r" does not exist
+STATEMENT:  DROP TABLE GM_QR_R
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_q" does not exist
+STATEMENT:  DROP TABLE GM_QR_Q
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_identity" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_IDENTITY
+ERROR:  table "gm_qr_r" does not exist
+STATEMENT:  DROP TABLE GM_QR_R
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_q" does not exist
+STATEMENT:  DROP TABLE GM_QR_Q
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_eg_temp_vect2" does not exist
+STATEMENT:  DROP TABLE GM_EG_TEMP_VECT2
+ERROR:  table "gm_eg_temp_vect3" does not exist
+STATEMENT:  DROP TABLE GM_EG_TEMP_VECT3
+ERROR:  table "gm_qr_decompose_identity" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_IDENTITY
+ERROR:  table "gm_qr_r" does not exist
+STATEMENT:  DROP TABLE GM_QR_R
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_q" does not exist
+STATEMENT:  DROP TABLE GM_QR_Q
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_qr_decompose_givens" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_GIVENS
+ERROR:  table "gm_qr_decompose_temp" does not exist
+STATEMENT:  DROP TABLE GM_QR_DECOMPOSE_TEMP
+ERROR:  table "gm_eig_values" does not exist
+STATEMENT:  DROP TABLE GM_EIG_VALUES
+ERROR:  table "gm_eig_vectors" does not exist
+STATEMENT:  DROP TABLE GM_EIG_VECTORS
+ERROR:  table "gm_rd_hop0" does not exist
+STATEMENT:  DROP TABLE GM_RD_HOP0
+ERROR:  table "gm_rd_hop1" does not exist
+STATEMENT:  DROP TABLE GM_RD_HOP1
+ERROR:  table "gm_rd_hop2" does not exist
+STATEMENT:  DROP TABLE GM_RD_HOP2
+ERROR:  table "gm_rd_hop3" does not exist
+STATEMENT:  DROP TABLE GM_RD_HOP3
+ERROR:  table "gm_rd_max_hop_ngh" does not exist
+STATEMENT:  DROP TABLE GM_RD_MAX_HOP_NGH
+ERROR:  table "gm_radius" does not exist
+STATEMENT:  DROP TABLE GM_RADIUS
+ERROR:  table "gm_belief_prior" does not exist
+STATEMENT:  DROP TABLE GM_BELIEF_PRIOR
+ERROR:  table "gm_belief" does not exist
+STATEMENT:  DROP TABLE GM_BELIEF
+ERROR:  table "gm_bp_next" does not exist
+STATEMENT:  DROP TABLE GM_BP_NEXT

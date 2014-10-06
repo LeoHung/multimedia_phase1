@@ -1,0 +1,1 @@
+/afs/andrew.cmu.edu/usr3/sanchuah/fall2014/multimedia_db/phase1/postgres/bin/postgres "-p" "5432" "-D" "/afs/andrew.cmu.edu/usr3/sanchuah/fall2014/multimedia_db/phase1/postgres/data/"
