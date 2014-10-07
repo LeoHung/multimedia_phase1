@@ -82,6 +82,9 @@ def gm_save_tables (dest_dir, belief):
     gm_sql_save_table_to_file(db_conn, GM_EIG_VECTORS, "row_id, col_id, value", \
                                   os.path.join(dest_dir,"eigvec.csv"), ",");
 
+    gm_sql_save_table_to_file(db_conn, GM_K_CORE, "node_id, component_id", \
+                                  os.path.join(dest_dir,"k_core.csv"), ",");
+
 
 #Project Tasks
 
@@ -219,12 +222,15 @@ def gm_pagerank (num_nodes, max_iterations = gm_param_pr_max_iter, \
 
 # Task 3: Weakly Connected Components
 #-------------------------------------------------------------#
-def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_name=None):
+def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_name=None, link_table_name=None):
     if con_comp_table_name == None:
         con_comp_table_name = GM_CON_COMP
 
     if node_table_name == None:
         node_table_name = GM_NODES
+
+    if link_table_name == None:
+        link_table_name = GM_TABLE_UNDIRECT
 
     temp_table = "GM_CC_TEMP"
     cur = db_conn.cursor()
@@ -241,7 +247,7 @@ def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_nam
         # Set component id as the min{component ids of neighbours, node's componet id}
         cur.execute("INSERT INTO %s " % temp_table +
                             " SELECT node_id, MIN(component_id) \"component_id\" FROM (" +
-                                " SELECT src_id \"node_id\", MIN(component_id) \"component_id\" FROM %s, %s" % (GM_TABLE_UNDIRECT,con_comp_table_name) +
+                                " SELECT src_id \"node_id\", MIN(component_id) \"component_id\" FROM %s, %s" % (link_table_name, con_comp_table_name) +
                                 " WHERE dst_id = node_id GROUP BY src_id" +
                                 " UNION" +
                                 " SELECT * FROM %s" %  con_comp_table_name +
@@ -840,16 +846,21 @@ def kcore(k=5):
             dest_table_name=temp_degree_table)
 
         # remove the node whose degree is under k
+        print "before delete : %d " % get_row_count(temp_degree_table)
         cur.execute("DELETE FROM %s" %(temp_degree_table) +
                 " WHERE in_degree < %d" % k
         )
         db_conn.commit()
+        print "after delete : %d " % get_row_count(temp_degree_table)
 
+
+        print "before delete: %d " % get_row_count(temp_link_table)
         cur.execute("DELETE FROM %s" %(temp_link_table) + 
                 " WHERE src_id NOT IN(SELECT node_id FROM %s) " %(temp_degree_table) +
-                " OR dst_id NOT IN (SELECT node_id FROM %s) " %(temp_degree_table)
+                " OR dst_id NOT IN(SELECT node_id FROM %s) " %(temp_degree_table)
         )
         db_conn.commit()
+        print "after delete: %d " % get_row_count(temp_link_table)
 
         # check if the number of nodes is changed. If no, break
         current_node_num = get_row_count(temp_degree_table)
@@ -865,7 +876,8 @@ def kcore(k=5):
     gm_connected_components(
         num_nodes=current_node_num,
         con_comp_table_name=GM_K_CORE,
-        node_table_name=temp_degree_table
+        node_table_name=temp_degree_table,
+        link_table_name=temp_link_table
     )
 
     cur.execute("DROP TABLE %s" % temp_link_table)
@@ -941,15 +953,15 @@ def main():
         gm_node_degrees()
 
         # Tasks
-#        gm_degree_distribution(args.undirected)                 # Degree distribution
-#
-#        gm_pagerank(num_nodes)                                  # Pagerank
-#        gm_connected_components(num_nodes)                      # Connected components
-#        gm_eigen(gm_param_eig_max_iter, num_nodes, gm_param_eig_thres1, gm_param_eig_thres2)
-#        gm_all_radius(num_nodes)
-#        if (args.belief_file):
-#            gm_belief_propagation(args.belief_file, args.delimiter, args.undirected)
-#
+        gm_degree_distribution(args.undirected)                 # Degree distribution
+
+        gm_pagerank(num_nodes)                                  # Pagerank
+        gm_connected_components(num_nodes)                      # Connected components
+        gm_eigen(gm_param_eig_max_iter, num_nodes, gm_param_eig_thres1, gm_param_eig_thres2)
+        gm_all_radius(num_nodes)
+        if (args.belief_file):
+            gm_belief_propagation(args.belief_file, args.delimiter, args.undirected)
+
         kcore(k=5)    
 
         gm_eigen_triangle_count()
