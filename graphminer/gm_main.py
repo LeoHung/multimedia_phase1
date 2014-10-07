@@ -924,6 +924,8 @@ def main():
                          The prior beliefs are expected to be centered around 0. i.e. positive \
                          nodes have priors >0, negative nodes <0 and unknown nodes 0. ')
 
+    parser.add_argument('--k', dest='k', type=int, default=5, help='k parameter is used in k core algorithm.')
+
     args = parser.parse_args()
 
     try:
@@ -962,7 +964,7 @@ def main():
         if (args.belief_file):
             gm_belief_propagation(args.belief_file, args.delimiter, args.undirected)
 
-        k_core(k=5)    
+        k_core(k=args.k)    
 
         gm_eigen_triangle_count()
         #gm_naive_triangle_count()
