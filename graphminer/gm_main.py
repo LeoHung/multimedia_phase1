@@ -10,7 +10,7 @@ db_conn = None;
 
 
 # Convert directed to undirected + remove multiple edges
-def gm_to_undirected(gm_table_name=None, gm_table_undirect_name=None, rm_multiple = True):
+def gm_to_undirected(rm_multiple = True, gm_table_name=None, gm_table_undirect_name=None):
     cur = db_conn.cursor()
     if gm_table_name == None:
         gm_table_name = GM_TABLE
@@ -223,7 +223,7 @@ def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_nam
     if con_comp_table_name == None:
         con_comp_table_name = GM_CON_COMP
 
-    if node_table_name = None:
+    if node_table_name == None:
         node_table_name = GM_NODES
 
     temp_table = "GM_CC_TEMP"
@@ -833,21 +833,33 @@ def kcore(k=5):
         gm_table_undirect_name=temp_link_table
     )
 
-    while isFinished:
+    while not isFinished:
         # calculate current degree for each node
-        gm_node_degrees(temp_degree_table)
+        gm_node_degrees(
+            gm_table_name=temp_link_table, 
+            dest_table_name=temp_degree_table)
 
         # remove the node whose degree is under k
         cur.execute("DELETE FROM %s" %(temp_degree_table) +
-                "WHERE in_degree < %d" % k
+                " WHERE in_degree < %d" % k
         )
+        db_conn.commit()
+
+        cur.execute("DELETE FROM %s" %(temp_link_table) + 
+                " WHERE src_id NOT IN(SELECT node_id FROM %s) " %(temp_degree_table) +
+                " OR dst_id NOT IN (SELECT node_id FROM %s) " %(temp_degree_table)
+        )
+        db_conn.commit()
 
         # check if the number of nodes is changed. If no, break
         current_node_num = get_row_count(temp_degree_table)
+        print "current_node_num = %d " % current_node_num
 
         if(current_node_num == last_node_num):
             isFinished = True
             break
+        else:
+            last_node_num = current_node_num
 
     # component detection
     gm_connected_components(
@@ -860,7 +872,7 @@ def kcore(k=5):
     cur.execute("DROP TABLE %s" % temp_degree_table)
 
     # return
-    cur.commit()
+    db_conn.commit()
     cur.close()
 
 def main():
@@ -929,15 +941,16 @@ def main():
         gm_node_degrees()
 
         # Tasks
-        gm_degree_distribution(args.undirected)                 # Degree distribution
-
-        gm_pagerank(num_nodes)                                  # Pagerank
-        gm_connected_components(num_nodes)                      # Connected components
-        gm_eigen(gm_param_eig_max_iter, num_nodes, gm_param_eig_thres1, gm_param_eig_thres2)
-        gm_all_radius(num_nodes)
-        if (args.belief_file):
-            gm_belief_propagation(args.belief_file, args.delimiter, args.undirected)
-
+#        gm_degree_distribution(args.undirected)                 # Degree distribution
+#
+#        gm_pagerank(num_nodes)                                  # Pagerank
+#        gm_connected_components(num_nodes)                      # Connected components
+#        gm_eigen(gm_param_eig_max_iter, num_nodes, gm_param_eig_thres1, gm_param_eig_thres2)
+#        gm_all_radius(num_nodes)
+#        if (args.belief_file):
+#            gm_belief_propagation(args.belief_file, args.delimiter, args.undirected)
+#
+        kcore(k=5)    
 
         gm_eigen_triangle_count()
         #gm_naive_triangle_count()
