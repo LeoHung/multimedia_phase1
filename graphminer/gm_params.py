@@ -40,7 +40,7 @@ gm_param_eig_thres1 = 0.1              # threhold for deciding to perform SO
 gm_param_eig_thres2 = 0.01             # stopping threshold
 gm_param_qr_max_iter = 500               # maximum iterations for QR algorithm
 gm_param_qr_thres = 0.01               # QR algorithm stop threshold
-gm_param_eig_k = 3                      # number of eigenvectors to return                      
+gm_param_eig_k = 3                      # number of eigenvectors to return
 
 # belief propagation
 GM_BELIEF_PRIOR = "GM_BELIEF_PRIOR"
@@ -50,6 +50,9 @@ gm_param_bp_thres = 0.01              # stopping threshold
 
 # anomaly detection
 GM_EGONET = "GM_EGONET"
+
+# k-core
+GM_K_CORE = "GM_K_CORE"
 
 
 
