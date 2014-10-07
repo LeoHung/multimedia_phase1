@@ -823,7 +823,7 @@ def get_row_count(table):
     cur.close()
     return count
 
-def kcore(k=5):
+def k_core(k=5):
     cur = db_conn.cursor()
 
     isFinished = False
@@ -962,7 +962,7 @@ def main():
         if (args.belief_file):
             gm_belief_propagation(args.belief_file, args.delimiter, args.undirected)
 
-        kcore(k=5)    
+        k_core(k=5)    
 
         gm_eigen_triangle_count()
         #gm_naive_triangle_count()
