@@ -1,0 +1,22 @@
+conncomp:
+length(unique(soc_conncomp(:,2)))
+2
+
+eigvec:
+hist(soc_eigvec(:,3), 100)
+
+indegreedist:
+hist(log(soc_indegreedist(:,2)), 100)
+
+outdegreedist:
+hist(log(soc_outdegreedist(:,2)), 100)
+
+k-core:
+length(unique(soc_k_core(:,2)))
+1
+
+pagerank:
+hist(soc_pagerank(:,2), 100)
+
+radius:
+hist(soc_radius(:,2))
