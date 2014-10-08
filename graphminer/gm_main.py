@@ -831,6 +831,7 @@ def k_core(k=5):
     last_node_num = -1
 
     temp_link_table = "TMP_GM_TABLE_UNDIRECT"
+    temp_link_table_2 = "TMP_GM_TABLE_UNDIRECT_2"
     temp_degree_table = "TMP_GM_NODE_DEGREES"
 
     # copy links from GM_TABLE_UNDIRECT to temp_link_table
@@ -839,32 +840,61 @@ def k_core(k=5):
         gm_table_undirect_name=temp_link_table
     )
 
+    gm_sql_table_drop_create(
+        db_conn,
+        temp_link_table_2,
+        "src_id integer, dst_id integer, weight real"
+    )
+
     while not isFinished:
         # calculate current degree for each node
         gm_node_degrees(
-            gm_table_name=temp_link_table, 
+            gm_table_name=temp_link_table,
             dest_table_name=temp_degree_table)
 
         # remove the node whose degree is under k
-#        print "before delete : %d " % get_row_count(temp_degree_table)
+        print "before delete nodes: %d " % get_row_count(temp_degree_table)
         cur.execute("DELETE FROM %s" %(temp_degree_table) +
                 " WHERE in_degree < %d" % k
         )
         db_conn.commit()
-#        print "after delete : %d " % get_row_count(temp_degree_table)
+        print "after delete nodes: %d " % get_row_count(temp_degree_table)
 
 
-#        print "before delete: %d " % get_row_count(temp_link_table)
-        cur.execute("DELETE FROM %s" %(temp_link_table) + 
-                " WHERE src_id NOT IN(SELECT node_id FROM %s) " %(temp_degree_table) +
-                " OR dst_id NOT IN(SELECT node_id FROM %s) " %(temp_degree_table)
+        print "before delete links: %d " % get_row_count(temp_link_table)
+        gm_sql_table_drop_create(
+            db_conn,
+            temp_link_table_2,
+            "src_id integer, dst_id integer, weight real"
         )
+        # cur.execute("DELETE FROM %s" %(temp_link_table) +
+        #         " WHERE src_id NOT IN(SELECT node_id FROM %s) " %(temp_degree_table) +
+        #         " OR dst_id NOT IN(SELECT node_id FROM %s) " %(temp_degree_table)
+        # )
+        cur.execute("INSERT INTO %s (src_id , dst_id, weight) " %(temp_link_table_2) +
+                    " SELECT src_id, dst_id, weight FROM %s " %(temp_link_table) +
+                    " LEFT JOIN %s as ANode ON %s.src_id = ANode.node_id" %(temp_degree_table, temp_link_table) +
+                    " LEFT JOIN %s as BNode ON %s.dst_id = BNode.node_id" %(temp_degree_table, temp_link_table) +
+                    " WHERE ANode.node_id is NOT NULL AND BNode.node_id is NOT NULL"
+        )
+
+        gm_sql_table_drop(db_conn, temp_link_table)
+
+        gm_sql_create_and_insert(
+            db_conn,
+            temp_link_table,
+            temp_link_table_2,
+            "src_id integer, dst_id integer, weight real",
+            "src_id, dst_id, weight",
+            "src_id, dst_id, weight"
+        )
+
         db_conn.commit()
-#        print "after delete: %d " % get_row_count(temp_link_table)
+        print "after delete links: %d " % get_row_count(temp_link_table)
 
         # check if the number of nodes is changed. If no, break
         current_node_num = get_row_count(temp_degree_table)
-#        print "current_node_num = %d " % current_node_num
+        print "current_node_num = %d " % current_node_num
 
         if(current_node_num == last_node_num):
             isFinished = True
@@ -882,11 +912,12 @@ def k_core(k=5):
         )
     else:
         gm_sql_table_drop_create(
-            db_conn=db_conn, 
+            db_conn=db_conn,
             table_name=GM_K_CORE,
-            create_sql_cols="node_id integer, component_id integer"  
+            create_sql_cols="node_id integer, component_id integer"
         )
 
+    cur.execute("DROP TABLE %s" % temp_link_table_2)
     cur.execute("DROP TABLE %s" % temp_link_table)
     cur.execute("DROP TABLE %s" % temp_degree_table)
 
@@ -971,7 +1002,7 @@ def main():
         if (args.belief_file):
             gm_belief_propagation(args.belief_file, args.delimiter, args.undirected)
 
-        k_core(k=args.k)    
+        k_core(k=args.k)
 
         gm_eigen_triangle_count()
         #gm_naive_triangle_count()
