@@ -1,0 +1,12 @@
+\contentsline {section}{\numberline {1}Literature Survey}{1}
+\contentsline {subsection}{\numberline {1.1}Papers read by Jiajun Wang}{1}
+\contentsline {subsection}{\numberline {1.2}Papers read by San-Chuan Hung }{3}
+\contentsline {section}{\numberline {2}K-core Algorithm Implementation}{4}
+\contentsline {section}{\numberline {3}Unit Test}{4}
+\contentsline {section}{\numberline {4}graphMiner Result}{5}
+\contentsline {section}{\numberline {A}Appendix}{6}
+\contentsline {subsection}{\numberline {A.1}Labor Division}{6}
+\contentsline {subsection}{\numberline {A.2}Full disclosure wrt dissertations/projects}{6}
+\contentsline {paragraph}{Smith:}{6}
+\contentsline {paragraph}{Thompson:}{6}
+\contentsline {paragraph}{Miller:}{6}
