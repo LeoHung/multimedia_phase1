@@ -1,12 +1,15 @@
 \contentsline {section}{\numberline {1}Literature Survey}{1}
 \contentsline {subsection}{\numberline {1.1}Papers read by Jiajun Wang}{1}
 \contentsline {subsection}{\numberline {1.2}Papers read by San-Chuan Hung }{3}
-\contentsline {section}{\numberline {2}K-core Algorithm Implementation}{4}
+\contentsline {section}{\numberline {2}K-cores Algorithm Implementation}{4}
 \contentsline {section}{\numberline {3}Unit Test}{4}
-\contentsline {section}{\numberline {4}graphMiner Result}{5}
-\contentsline {section}{\numberline {A}Appendix}{6}
-\contentsline {subsection}{\numberline {A.1}Labor Division}{6}
-\contentsline {subsection}{\numberline {A.2}Full disclosure wrt dissertations/projects}{6}
-\contentsline {paragraph}{Smith:}{6}
-\contentsline {paragraph}{Thompson:}{6}
-\contentsline {paragraph}{Miller:}{6}
+\contentsline {subsection}{\numberline {3.1}Connected Component}{4}
+\contentsline {subsection}{\numberline {3.2}Degree Distribution}{6}
+\contentsline {subsection}{\numberline {3.3}K-cores algorithm}{8}
+\contentsline {section}{\numberline {4}graphMiner Result}{10}
+\contentsline {subsection}{\numberline {4.1}Connected Component}{10}
+\contentsline {subsection}{\numberline {4.2}Eigenvalue}{11}
+\contentsline {subsection}{\numberline {4.3}K core}{11}
+\contentsline {subsection}{\numberline {4.4}Degree Distrubutions}{11}
+\contentsline {subsection}{\numberline {4.5}Page Rank and Eigenvector}{11}
+\contentsline {subsection}{\numberline {4.6}Radius}{11}

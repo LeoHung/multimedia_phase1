@@ -4,6 +4,8 @@
 \usepackage{graphicx}
 \usepackage{graphics}
 \usepackage{mdwlist}
+\usepackage{listings}
+\usepackage{subfig}
 
 
 % christos: these look closer to NSF specs\dots
@@ -18,7 +20,6 @@
 \addtolength{\textheight}{-\headheight}
 \addtolength{\textheight}{-\headsep}
 \addtolength{\textheight}{-\footskip}
-
 
 
 \begin{document}
@@ -50,26 +51,25 @@
 \maketitle
 \section{Literature Survey}
     \label{sec:survey}
-    \input{020survey}
+    \input{010survey}
 
 \section{K-cores Algorithm Implementation}
-    \label{sec:proposed}
-    \input{030method}
+    \label{sec:kcor}
+    \input{020kcore}
 
 \section{Unit Test}
-    \label{sec:experiments}
-    \input{040unittest}
+    \label{sec:unittest}
+    \input{030unittest}
 
 \section{graphMiner Result}
-    \label{sec:conclusions}
-    \input{050conclusions}
+    \label{sec:graphminer}
+    \input{040graphminer}
+    
+\section{Division of Labour and Future Plan}
+    \label{sec:divisionoflabour}
+    \input{050divisionoflabour}
 
 \bibliography{BIB/sanchuah}
 \bibliographystyle{plain}
-
-\newpage
-\pagenumbering{roman}
-\tableofcontents
-
 
 \end{document}
