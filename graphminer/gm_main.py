@@ -186,6 +186,11 @@ def gm_pagerank (num_nodes, max_iterations = gm_param_pr_max_iter, \
         # Create Table to store the next pageRank
         gm_sql_table_drop_create(db_conn, next_table,"node_id integer, page_rank double precision")
 
+        # ADD INDEX
+        cur.execute("CREATE INDEX NEXT_NODEID ON %s using hash (node_id) " % next_table )
+        db_conn.commit()
+        # ADD INDEX
+
         # Compute Next PageRank
         cur.execute ("INSERT INTO %s " % next_table +
                                 " SELECT node_id, SUM(page_rank) FROM (" +
@@ -240,6 +245,11 @@ def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_nam
     gm_sql_create_and_insert(db_conn, con_comp_table_name, node_table_name, \
                              "node_id integer, component_id integer", \
                              "node_id, component_id", "node_id, node_id")
+    ##### INDEX #####  
+    cur.execute("CREATE INDEX CONN_COMPONENT_ID ON %s using btree (component_id) " % con_comp_table_name )
+    cur.execute("CREATE INDEX CONN_NODE_ID ON %s using hash (node_id) " % con_comp_table_name )
+    db_conn.commit()
+    ##### INDEX#####
 
     while True:
         gm_sql_table_drop_create(db_conn, temp_table,"node_id integer, component_id integer")
@@ -260,6 +270,11 @@ def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_nam
         gm_sql_create_and_insert(db_conn, con_comp_table_name, temp_table, \
                                     "node_id integer, component_id integer", \
                                     "node_id, component_id", "node_id, component_id")
+        ##### INDEX #####  
+        cur.execute("CREATE INDEX CONN_COMPONENT_ID ON %s using btree (component_id) " % con_comp_table_name )
+        cur.execute("CREATE INDEX CONN_NODE_ID ON %s using hash (node_id) " % con_comp_table_name )
+        db_conn.commit()
+        ##### INDEX#####
 
         print "Error = " + str(diff)
         # Check whether the component ids has converged
@@ -448,6 +463,12 @@ def gm_eigen_QR_iterate(T, n, EVal, EVec, steps, err):
         # Set EVal as RQ
         gm_sql_mat_mat_multiply (db_conn, R, Q, EVal, "col_id", "row_id", "value", "value",
                                              "value", "row_id", "col_id", "row_id", "col_id")
+
+        ##### Eval row_id col_id INDEX #####  
+        cur.execute("CREATE INDEX EVAL_ROWID ON %s using btree (row_id) " % EVal )
+        cur.execute("CREATE INDEX EVAL_COLID ON %s using btree (col_id) " % EVal )
+        db_conn.commit()
+        ##### Eval row_id col_id INDEX#####
 
         if i==1:
             # Copy Q to EVec
