@@ -246,8 +246,8 @@ def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_nam
                              "node_id integer, component_id integer", \
                              "node_id, component_id", "node_id, node_id")
     ##### INDEX #####  
-    cur.execute("CREATE INDEX CONN_COMPONENT_ID ON %s using btree (component_id) " % con_comp_table_name )
-    cur.execute("CREATE INDEX CONN_NODE_ID ON %s using hash (node_id) " % con_comp_table_name )
+    cur.execute("CREATE INDEX %s_COMPONENT_ID ON %s using btree (component_id) " % (con_comp_table_name, con_comp_table_name) )
+    cur.execute("CREATE INDEX %s_NODE_ID ON %s using hash (node_id) " % (con_comp_table_name, con_comp_table_name) )
     db_conn.commit()
     ##### INDEX#####
 
@@ -271,8 +271,8 @@ def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_nam
                                     "node_id integer, component_id integer", \
                                     "node_id, component_id", "node_id, component_id")
         ##### INDEX #####  
-        cur.execute("CREATE INDEX CONN_COMPONENT_ID ON %s using btree (component_id) " % con_comp_table_name )
-        cur.execute("CREATE INDEX CONN_NODE_ID ON %s using hash (node_id) " % con_comp_table_name )
+        cur.execute("CREATE INDEX %s_COMPONENT_ID ON %s using btree (component_id) " % (con_comp_table_name, con_comp_table_name) )
+        cur.execute("CREATE INDEX %s_NODE_ID ON %s using hash (node_id) " % (con_comp_table_name, con_comp_table_name) )
         db_conn.commit()
         ##### INDEX#####
 
