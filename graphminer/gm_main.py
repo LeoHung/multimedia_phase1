@@ -244,12 +244,8 @@ def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_nam
     # Create CC table and initialize component id to node id
     gm_sql_create_and_insert(db_conn, con_comp_table_name, node_table_name, \
                              "node_id integer, component_id integer", \
-                             "node_id, component_id", "node_id, node_id")
-    ##### INDEX #####  
-    cur.execute("CREATE INDEX %s_COMPONENT_ID ON %s using btree (component_id) " % (con_comp_table_name, con_comp_table_name) )
-    cur.execute("CREATE INDEX %s_NODE_ID ON %s using hash (node_id) " % (con_comp_table_name, con_comp_table_name) )
-    db_conn.commit()
-    ##### INDEX#####
+                             "node_id, component_id", "node_id, node_id", \
+                            [("component_id", "btree"), ("node_id", "hash")])
 
     while True:
         gm_sql_table_drop_create(db_conn, temp_table,"node_id integer, component_id integer")
@@ -269,12 +265,8 @@ def gm_connected_components (num_nodes, con_comp_table_name=None, node_table_nam
         # Copy the new component ids to the component id table
         gm_sql_create_and_insert(db_conn, con_comp_table_name, temp_table, \
                                     "node_id integer, component_id integer", \
-                                    "node_id, component_id", "node_id, component_id")
-        ##### INDEX #####  
-        cur.execute("CREATE INDEX %s_COMPONENT_ID ON %s using btree (component_id) " % (con_comp_table_name, con_comp_table_name) )
-        cur.execute("CREATE INDEX %s_NODE_ID ON %s using hash (node_id) " % (con_comp_table_name, con_comp_table_name) )
-        db_conn.commit()
-        ##### INDEX#####
+                                    "node_id, component_id", "node_id, component_id", \
+                                    [("component_id", "btree"), ("node_id", "hash")])
 
         print "Error = " + str(diff)
         # Check whether the component ids has converged
@@ -1019,7 +1011,7 @@ def main():
         gm_pagerank(num_nodes)                                  # Pagerank
         gm_connected_components(num_nodes)                      # Connected components
         gm_eigen(gm_param_eig_max_iter, num_nodes, gm_param_eig_thres1, gm_param_eig_thres2)
-        gm_all_radius(num_nodes)
+        #gm_all_radius(num_nodes)
         if (args.belief_file):
             gm_belief_propagation(args.belief_file, args.delimiter, args.undirected)
 

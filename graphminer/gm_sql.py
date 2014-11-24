@@ -21,9 +21,15 @@ def gm_sql_print_table(db_conn, table_name):
 
     cur.close();
 
-def gm_sql_create_and_insert(db_conn, dest_table, src_table, col_fmt, insert_cols, select_cols):
+def gm_sql_create_and_insert(db_conn, dest_table, src_table, col_fmt, insert_cols, select_cols, indices = None):
     cur = db_conn.cursor()
     gm_sql_table_drop_create(db_conn, dest_table, col_fmt)
+    
+    if indices != None:
+        for column, type in indices:
+            cur.execute("CREATE INDEX %s ON %s using %s (%s) " % (column+dest_table, dest_table, type, column))
+            db_conn.commit()
+    
     cur.execute ("INSERT INTO %s(%s)" % (dest_table, insert_cols) + " SELECT %s FROM %s" % (select_cols,src_table))
     db_conn.commit()
     cur.close()
