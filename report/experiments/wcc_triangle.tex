@@ -1,0 +1,25 @@
+
+\subsubsection{Weakly Connected Component and Triangle count}
+
+We find there are 2 highly connected graphs. p2p-Gnutella31 has 12 components and cit-HepPh has 61 components. This shows the nodes in these 2 graphs are mostly connected to each others.
+On the other hand, email-EuAll has 15836 components. Although the maximun component size is huge, the connection between nodes are not strong in this graph.
+\\
+Triangle count shows that ca-AstroPh, cit-HepPh, email-Enron.ungraph are email-EuAll are densely connected. One interesting observation is that the p2p-Gnutella31 has very low triangle count, although the connected components shows that most nodes connect to each others in the graph. The may be caused by some very popular nodes. So that most nodes connect to these popular servers instead of connecting to each others.
+\\
+\\
+\scalebox{0.8}{
+\begin{tabular}{| l | c | c | c | c | c |} \hline
+\textbf{Metrics} & \textbf{as-skitter} & \textbf{ca-AstroPh} & \textbf{cit-HepPh} & \textbf{cit-HepTh} & \textbf{com-amazon} \\ \hline
+components & 310 & 290 & 61 & 143 & 1946 \\ \hline
+max group & 69768 & 17926 & 34454 & 27465 & 47556 \\ \hline
+triangle & 28389.34144 & 1061822.808 & 60696.51906 & 191035.2798 & 132.7590596 \\ \hline
+\end{tabular}}\\
+\\
+\\
+\scalebox{0.8}{
+\begin{tabular}{| l | c | c | c | c | c |} \hline
+\textbf{Metrics} & \textbf{com-dblp} & \textbf{email-Enron} & \textbf{email-EuAll} & \textbf{p2p-Gnutella31} & \textbf{soc-Slashdot0811} \\ \hline
+components & 949 & 1065 & 15836 & 12 & 2091\\ \hline
+max group & 67361 & 33696 & 224832 & 62561 & 72780\\ \hline
+triangle & 786.338039 & 2059367.367 & 370075.0779 & 307.5803753 & 252186.8962\\ \hline
+\end{tabular}}\

@@ -1,0 +1,46 @@
+
+\subsubsection{K-core algorithm}
+
+We set k = 5 and apply K-core algorithm on 10 graphs. The result shows that the graphs can be grouped into two types of graphs. Type I graphs, like soc-Slashdot0811-75000, p2p-Gnutella31, email-EuAll, email-Enron.ungraph, cit-HepTh, cit-HepPh, ca-AstroPh, have a giant 5-core with more than 7000 nodes, which means that type I graph is densely connected. Type II graphs, like com-dblp.ungraph-75000, com-amazon.ungraph-75000, and as-skitter.75000, do not have such a giant k-core. Instead, there are many small (size $<$ 500) 5-cores in type II graphs. It indicates that Type II graphs are not densely connected.
+
+\begin{center}
+\scalebox{0.6}{
+  \begin{tabular}{ |c | c | c | c | c | c | c | c | c | c | c | c | c | c |  }
+    \hline
+         \multicolumn{2}{|c|}{soc-Slashdot0811-75000} & \multicolumn{2}{c|}{p2p-Gnutella31} & \multicolumn{2}{c|}{email-EuAll} & \multicolumn{2}{c|}{email-Enron.ungraph} & \multicolumn{2}{c|}{cit-HepTh} & \multicolumn{2}{c|}{cit-HepPh} & \multicolumn{2}{c|}{ca-AstroPh} \\ \hline
+		size & frequency & size & frequency & size & frequency & size & frequency & size & frequency & size & frequency & size & frequency  \\ \hline
+		26137  & 1 &16174  & 1 & 7030 & 1 & 6 & 6 & 21181 & 1 & 28593 & 1 & 6 & 2 \\ \hline
+		& & & & & & 7 & 2 & & & & & 7 & 2 \\ \hline
+		& & & & & & 8 & 3 & & & & & 8 & 1 \\ \hline
+		& & & & & & 9 & 1 & & & & & 11 & 1 \\ \hline
+		& & & & & & 12 & 1 & & & &  & 18 & 1 \\ \hline
+		& & & & & & 15 & 1 & & & &  & 12236 & 1 \\ \hline
+		& & & & & & 11538 & 1 & & & & &   &  \\ \hline
+  \end{tabular}}
+\scalebox{0.6}{
+  \begin{tabular}{ |c | c | c | c | c | c | c | c | c | c | c | c | c | c |  }
+    \hline
+         \multicolumn{2}{|c|}{as-Caida} & \multicolumn{2}{c|}{cit-Cora} & \multicolumn{2}{c|}{soc-digg} & \multicolumn{2}{c|}{soc-flickr-75000} & \multicolumn{2}{c|}{soc-hamsterster} & \multicolumn{2}{c|}{soft-jdkdependency} & \multicolumn{2}{c|}{ca-AstroPh} \\ \hline
+		size & frequency & size & frequency & size & frequency & size & frequency & size & frequency & size & frequency & size & frequency  \\ \hline
+		1192  & 1 & 9355 & 1 & 6794 & 1 & 1122 & 1 & 1070 & 1 & 4869 & 1 & 3144 & 1 \\ \hline
+		& & & & & & & & & & & & & \\ \hline
+  \end{tabular}}  
+  \\5-core distribution in Type I graphs
+\end{center}
+
+\begin{center}
+\scalebox{0.6}{
+  \begin{tabular}{ |c | c | c | c | c | c | c | c | c | c | c | c |  }
+    \hline
+         \multicolumn{2}{|c|}{as-skitter.75000} & \multicolumn{2}{c|}{com-dblp.ungraph-75000} & \multicolumn{2}{c|}{com-amazon.ungraph-75000} & \multicolumn{2}{c|}{bio-protein}  & \multicolumn{2}{c|}{soc-pokec}  & \multicolumn{2}{c|}{soc-Youtube-75000}  \\ \hline
+		size & frequency & size & frequency & size & frequency & size & frequency & size & frequency & size & frequency   \\ \hline
+		14  & 1 & 6 & 9 & 6 & 1 & 6 & 1 & 0 & 0 & 0 & 0 \\ \hline
+		181 & 1 & 7 & 3 & & & & & & & &  \\ \hline
+		& & 8 & 3 & & & & & & & & \\ \hline
+		& & 9 & 1 & & & & & & & & \\ \hline
+		& & 10 & 1 & & & & & & & & \\ \hline
+		& & 13 & 1 & & & & & & & & \\ \hline
+		& & 15 & 1 & & & & & & & & \\ \hline
+  \end{tabular}}
+    \\5-core distribution in Type II graphs
+\end{center}
