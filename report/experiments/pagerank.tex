@@ -1,7 +1,5 @@
 \subsubsection{PageRank}
 
-The experiment result (Figure. \ref{fig:pagerank}) shows that the Pagerank value distribution in most of graphs follow power law.
-
 \begin{figure}
 \subfloat[as-skitter.75000\label{fig:as-skitter}]
   {\includegraphics[width=.25\linewidth]{FIG/pagerank/as-skitter_75000.png}}\hfill
@@ -46,3 +44,34 @@ The experiment result (Figure. \ref{fig:pagerank}) shows that the Pagerank value
 \caption{Pagerank value Distributions of 20 graphs}
 \label{fig:pagerank}
 \end{figure}
+
+\textbf{Global Pattern}
+\\
+\\
+The experiment result (Figure. \ref{fig:pagerank}) shows that the PageRank value distribution in most of graphs follow power law.
+\\
+\\
+\textbf{Strange Behaviors}
+\\
+\\
+(1) Plateau in the Beginning
+\\
+\\
+The distribution of PageRank in most of graphs follow power low; however, we found that there are plateaus in the beginning part of some distribution charts. Taking com-amazon.ungraph-75000 for example, the line between $10^{-8}$ and $10^{-5}$ is relative smooth. 
+\\
+ca-AstroPh, com-amazon.ungraph-75000, com-dblp.ungraph-75000, email-Enron.ungraph, soc-Slashdot0811-75000, as-Caida, soc-flickr-75000, soc-pokec-75000, soc-Youtube-75000, and text-spanishbook have such plateau pattern.
+\\
+\\
+(2) Broom Tail
+\\
+\\
+Ideally, the chart of distribution following power would be a smooth descending straight line in log-log scale plot; however, we found that some lines of real data are not as smooth as ideal straight lines. Instead, the lines of some real data jump up and down in the last part. The shape is like a bloom.
+\\
+as-skitter, cit-HepTh, email-Enron.ungraph, email-EuAll, as-Caida, cit-Cora, soc-Youtube-75000, soft-jdkdependency, and text-spanishbook have such broom tail pattern.
+\\
+\\
+(3) Vibrating Line
+\\
+\\
+The lines in PageRank distribution chart are usually smooth, but there are some lines vibrating severely. Taking soc-hamsterster for example, its line jumps up and down severely, although the trend of line follow power-law. bio-protein and soc-hamsterster have such pattern.
+

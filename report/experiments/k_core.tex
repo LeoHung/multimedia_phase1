@@ -1,8 +1,22 @@
 
 \subsubsection{K-core algorithm}
-
-We set k = 5 and apply K-core algorithm on 10 graphs. The result shows that the graphs can be grouped into two types of graphs. Type I graphs, like soc-Slashdot0811-75000, p2p-Gnutella31, email-EuAll, email-Enron.ungraph, cit-HepTh, cit-HepPh, ca-AstroPh, have a giant 5-core with more than 7000 nodes, which means that type I graph is densely connected. Type II graphs, like com-dblp.ungraph-75000, com-amazon.ungraph-75000, and as-skitter.75000, do not have such a giant k-core. Instead, there are many small (size $<$ 500) 5-cores in type II graphs. It indicates that Type II graphs are not densely connected.
-
+\textbf{Global Pattern}
+\\
+\\
+We set k = 5, apply K-core algorithm on 20 graphs, and count the distribution of k-core size, which is shown in below tables. According to the result, the graphs can be grouped into two types of graphs: Type I graphs and Type II graphs.
+\\
+\\
+\textbf{Type I Graphs}
+\\
+\\
+Type I graphs, like soc-Slashdot0811-75000, p2p-Gnutella31, email-EuAll, email-Enron.ungraph, cit-HepTh, cit-HepPh, ca-AstroPh , as-Caida, cit-Cora, soc-digg, soc-flickr-75000, soc-hamsterster, soft-jdkdependency, and ca-AstroPh, have a giant 5-core with more than 1000 nodes, which means that type I graph is densely connected. 
+\\
+\\
+\textbf{Type II Graphs}
+\\
+\\
+Type II graphs, like as-skitter.75000, com-dblp.ungraph-75000, com-amazon.ungraph-75000, bio-protein, soc-pokec, and soc-Youtube-75000, do not have such a giant k-core. Instead, there are many small (size $<$ 500) 5-cores in type II graphs. Moreover, some graphs even do not have 5-cores, like bio-protein, soc-pokec, and soc-Youtube-75000. It indicates that Type II graphs are not densely connected.
+\\
 \begin{center}
 \scalebox{0.6}{
   \begin{tabular}{ |c | c | c | c | c | c | c | c | c | c | c | c | c | c |  }
