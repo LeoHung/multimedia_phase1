@@ -1,10 +1,21 @@
 
 \subsubsection{Weakly Connected Component and Triangle count}
-
-We find there are 2 highly connected graphs. p2p-Gnutella31 has 12 components and cit-HepPh has 61 components. This shows the nodes in these 2 graphs are mostly connected to each others.
-On the other hand, email-EuAll has 15836 components. Although the maximun component size is huge, the connection between nodes are not strong in this graph.
 \\
-Triangle count shows that ca-AstroPh, cit-HepPh, email-Enron.ungraph are email-EuAll are densely connected. One interesting observation is that the p2p-Gnutella31 has very low triangle count, although the connected components shows that most nodes connect to each others in the graph. The may be caused by some very popular nodes. So that most nodes connect to these popular servers instead of connecting to each others.
+\textbf{Global Pattern} \\
+We find that most graphs consist of a small number of groups (compared with the total number of nodes). And most nodes are in one biggest groups. \\
+And the triangle number illustrates how nodes in groups are connected to each other. \\
+\\
+\textbf{Strange Behaviors} \\
+\begin{itemize} 
+\item p2p-Gnutella31 has 12 components. This shows the nodes in this graph are highly connected. But the triangle count is little. So it seems that there are several popular nodes in this graph. And most nodes connect to these popular servers instead of connecting to each others. \\
+\item cit-HepPh has 61 components and the triangle count is a large number. This shows the nodes in this graph are mostly connected to each others. \\
+\item email-EuAll has 15836 components. Although the maximun component size is huge, the connections between nodes are not strong. It illustrates people are more likely to form small discussion groups in daily work communication.
+\item ca-AstroPh and email-Enron have extremely high triangle counts. Which shows the nodes in these 2 graphs are very densely connected.
+\item Nodes in as-Caida are all connected. And the triangles is much more than nodes number. Which indicates the graph is very dense.
+\item Nodes in cit-Cora are also all connected. But the triangle number is not large compared with the nodes number. So this graph is more likely to be a star type graph (highly centralize).
+\item In soc-hamsterster, triangles number is huge compared with members in each components. This shows that each components are highly connected. So the members in each components are very related with each other.
+\item soc-pokec has extremely small triangles number(4.8). Which indicates the graph is highly centralize in each sub groups.
+\item soft-jdkdependency and text-spanishbook both have large triangles numbers and all connected. The graphs are very dense.
 \\
 \\
 \scalebox{0.8}{
@@ -22,4 +33,22 @@ triangle & 28389.34144 & 1061822.808 & 60696.51906 & 191035.2798 & 132.7590596 \
 components & 949 & 1065 & 15836 & 12 & 2091\\ \hline
 max group & 67361 & 33696 & 224832 & 62561 & 72780\\ \hline
 triangle & 786.338039 & 2059367.367 & 370075.0779 & 307.5803753 & 252186.8962\\ \hline
-\end{tabular}}\
+\end{tabular}}\\
+\\
+\\
+\scalebox{0.8}{
+\begin{tabular}{| l | c | c | c | c | c |} \hline
+\textbf{Metrics} & \textbf{as-Caida} & \textbf{bio-protein} & \textbf{cit-Cora} & \textbf{soc-digg} & \textbf{soc-flickr} \\ \hline
+components & 1 & 173 & 1 & 373 & 1280 \\ \hline
+max group & 26475 & 1458 & 23166 & 29652 & 63529 \\ \hline
+triangle & 29967.0841542 & 30.1742701786 & 3192.44451312 & 5207.40905806 & 1574.17467495 \\ \hline
+\end{tabular}}\\
+\\
+\\
+\scalebox{0.8}{
+\begin{tabular}{| l | c | c | c | c | c |} \hline
+\textbf{Metrics} & \textbf{soc-hamsterster} & \textbf{soc-pokec} & \textbf{soc-Youtube} & \textbf{soft-jdkdependency} & \textbf{text-spanishbook} \\ \hline
+components & 23 & 113 & 4319 & 1 & 1\\ \hline
+max group & 1788 & 73564 & 54143 & 6434 & 12643\\ \hline
+triangle & 15328.5846289 & 4.77180117934 & 100.71969417 & 150378.549887 & 191251.983102\\ \hline
+\end{tabular}}\\
