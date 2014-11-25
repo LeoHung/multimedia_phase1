@@ -1,9 +1,22 @@
 
 \subsubsection{Degree distribution}
 
-Show in Figure \ref{fig:as-skitter_degree_dist} to  \ref{fig:soc-Slashdot0811_degree_dist}.
+Show in Figure \ref{fig:as-skitter_degree_dist} to  \ref{fig:text-spanishbook_degree_dist}. \\
 \\
-The degree distributions in most of graphs follow power law. We found that there were spikes in p2p-Gnutella31 outdegree and degree distribution. The reason for the spike may be because of default peer number of setting in p2p software. Besides p2p graph, there were little spikes in email-Enron and soc-Slashdot0811. 
+\textbf{Global Pattern} \\
+The figures of degree distributions show that most graphs follow power law. \\
+\\
+\textbf{Strange Behaviors} \\
+\begin{itemize} 
+\item a-AstroPh does not strictly follow power law. In \ref{fig:ca-AstroPh_degree_dist} we can see that nodes with particular degrees are more than expect. \\
+\item There are spikes in p2p-Gnutella31 outdegree and degree distribution: \ref{fig:p2p-Gnutella31_degree_dist}. The reason for the spike may be because of default peer number of setting in p2p software. \\
+\item There is spike in email-Enron:  \ref{fig:email-Enron.ungraph_degree_dist}. It might illustrates the most common connector numbers of a normal email user.\\
+\item There is spike in soc-Slashdot0811: \ref{fig:soc-Slashdot0811_degree_dist}. Similar to email-Enron, the spike might shows that a lot of users in Slashdot have about 2 friends.\\
+\item as-Caida does not strictly follow power law. In \ref{fig:as-Caida.undir.txt_degree_dist} we can see that numbers of nodes with degree 1 or 2 are very similar. \\
+\item There are lot of small spikes in soc-hamsterster: \ref{fig:soc-hamsterster_degree_dist}. They illustrate that there are many nodes in the graph have high degree. The graph tends to be highly connected.\\
+\item In soft-jdkdependency \ref{fig:soft-jdkdependency_degree_dist}.There is a big group of nodes have similar out degree around 4 to 10. This indicates that jdk libs dependency are mostly within the scope of 4 to 10. And there is a small group of nodes which have very large out degree. These nodes should be very basic libs which are used by all other libs.\\
+\item There is a small spike in degree plot around degree 1 and 2 in text-spanishbook \ref{fig:text-spanishbook_degree_dist}. These words could be idioms, which only followed by one or two specified words.
+\end{itemize}
 
 \begin{figure}
 \subfloat[In-Degree Distribution\label{fig:as-skitter_indegree}]
@@ -159,9 +172,6 @@ The degree distributions in most of graphs follow power law. We found that there
   {\includegraphics[width=.3\linewidth]{FIG/soc-pokec-75000.txt-degree.png}}
 \caption{Degree Distributions of soc-pokec\label{fig:soc-pokec_degree_dist}}
 \end{figure}
-
-\clearpage 
-
 \begin{figure}
 \subfloat[In-Degree Distribution\label{fig:soc-Youtube_indegree}]
   {\includegraphics[width=.3\linewidth]{FIG/soc-Youtube-75000.undir.txt-indegreedist.png}}\hfill
