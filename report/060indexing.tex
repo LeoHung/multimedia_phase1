@@ -1,0 +1,161 @@
+\subsection{Indexing Experiment}
+
+In the experiment, we treated all graphs as direct ones. So "as-skitter.ungraph-75000.txt" is extended to a direct graph. \\
+Tested graphs include: p2p-Gnutella31.txt, as-skitter.75000.txt, ca-AstroPh.txt, email-EuAll.txt, cit-HepTh.txt.\\
+
+
+\subsubsection{Degree distribution}
+
+\textbf{Gm Node Degrees}
+\\
+The algorithm aggregates the count of dist nodes and src nodes in GM\_TABLE for counting in degree and out degree. \\
+We tried to add hash index and btree index on dist\_id and src\_id. The result shows that indices do not improve the performance. Actually the overhead of building the index makes the total running time longer.\\
+One explanation of this result is that "group by" goes through all data. Index does not optimize the total sql running time in this case.\\
+\\
+\scalebox{0.9}{\begin{tabular}{ |l |c | c | c | c | c| }
+\hline
+Index & p2p-Gnutella31.txt & as-skitter.75000.txt & ca-AstroPh.txt & email-EuAll.txt & cit-HepTh.txt \\ \hline
+None & 1.577036858 & 3.187309027 & 1.678581953 & 3.384658098 & 3.223124027\\ \hline
+hash & 2.431274891 & 4.133288145 & 4.991292953 & 10.31514502 & 3.931537151\\ \hline
+btree & 2.418382883 & 4.755445004 & 2.523052931 & 5.85737586 & 3.046495914\\ \hline
+\end{tabular}}\\
+\\
+\\
+\textbf{Gm Degree Distribution}
+\\
+The algorithm aggregates the count of out\_degree and in\_degree in GM\_NODE\_DEGREES for counting degree distribution. \\
+We tried to build indices on out\_degree and in\_degree for testing whether these indices can accelerate the group by. Notice that the original count is very fast, so I change the code. The group by sql will run 100 times for time estimating.\\
+Basically we have 2 columns in the scope: in\_degree and out\_degree. We tried: 1. hash index on both columns; 2. btree index on both columns; 3. joint btree index on the columns; 4. joint btree index plus separate btree indices on both columns. The result shows that indices do not help the sql running.\\
+The reason is the same as "gm\_node\_degrees". If the sql needs to go through the whole table anyway, indices do not improve the performance.\\
+\\
+\\
+\scalebox{0.9}{\begin{tabular}{ |l |c | c | c | c | c | }
+\hline
+Index & p2p-Gnutella31.txt & as-skitter.75000.txt  & ca-AstroPh.txt & email-EuAll.txt & cit-HepTh.txt \\ \hline
+None & 16.55248189 & 18.40389895 & 12.65532494 & 35.27958608 & 9.814982176 \\ \hline
+hash & 14.32086205 & 20.65242195 & 9.01839304 & 50.09777999 & 9.146636009  \\ \hline
+btree & 13.04618001 & 17.1775279 & 9.203239918 & 30.25537395 & 11.63468695  \\ \hline
+joint btree & 12.15740585 & 17.67118001 & 11.81989694 & 31.76970196 & 9.897273064\\ \hline
+all btree & 12.51487803 & 12.83897305 & 12.14183187 & 31.41780305 & 8.73434186 \\ \hline
+\end{tabular}} \\
+
+
+\subsubsection{PageRank}
+
+Index of columns in "WHERE" condition can help MySQL speed up value comparison in join operation. Therefore, we found that there are 5 possible positions to add index: GM\_Table.src\_id, norm\_table.src\_id, GM\_PAGERANK.node\_id, offset\_stable.node\_id, and next\_table.node\_id. 
+\\
+According to experiment result, we found that adding B-tree index on GM\_PAGERANK.node\_id improved the performance best. We also tried many index combinations, but the performance did not increase. Therefore, we decided to add B-tree index on index on GM\_PAGERANK.node\_id  for Pagerank algorithm.
+
+\begin{center}
+\scalebox{0.6}{
+  \begin{tabular}{ |l | c | c | c | c | c | c | c |  }
+    \hline
+    \textbf{Index Type} & \textbf{Index column} & \textbf{p2p-Gnutella31} & \textbf{ca-AstroPh} & \textbf{email-EuAll} & \textbf{cit-HepTh} & \textbf{as-skitter.75000} &  \textbf{Improvement} \\ \hline
+    No Index & & 5.253519 & 4.519811 & 41.935326 & 12.899988 & 17.064826 & (baseline)  \\ \hline
+	Btree & GM\_Table.src\_id & 3.482836 & 4.240341 & 28.786316 & 5.008184 & 12.756178 & 31.533\% \\ \hline
+	Hash & GM\_Table.src\_id & 5.645929 & 5.414358 & 33.585078 & 6.153968 & 14.20149 & 12.345\% \\ \hline
+	Btree & norm\_table.src\_id & 3.725514 & 7.023653 & 34.940364 & 5.243184 & 11.328331 & 16.667\% \\ \hline
+	Hash & norm\_table.src\_id & 4.831202 & 8.649363 & 37.06228 & 9.590399 & 11.593534 & -2.797\% \\ \hline
+	Btree & GM\_PAGERANK.node\_id & 2.834585 & 4.510517 & 28.573334 & 5.31056 & 12.19424 & 33.097\% \\ \hline
+	Hash & GM\_PAGERANK.node\_id & 2.998954 & 6.758051 & 33.857276 & 5.976427 & 10.206583 & 21.303\% \\ \hline
+	Btree & offset\_stable.node\_id & 3.235787 & 5.560484 & 32.713935 & 9.890352 & 14.586771 & 15.044\% \\ \hline
+	Hash & offset\_stable.node\_id & 6.353038 & 6.031949 & 35.412756 & 4.819224 & 14.377134 & 7.912\% \\ \hline
+	Btree & next\_table.node\_id & 3.348404 & 7.015845 & 57.072034 & 4.326479 & 8.313848 & 12.537\% \\ \hline
+	Hash & next\_table.node\_id & 2.320558 & 4.440724 & 27.453469 & 4.527795 & 10.225985 & 39.417\% \\ \hline
+  \end{tabular}}
+\end{center}
+
+\subsubsection{Weakly connected components}
+
+
+Firstly, the sql needs to update the component ids by comparing node ids based on link\_table (GM\_TABLE\_UNDIRECT) in a loop. The component id is retrieved from the minimum node\_id. So btree index should help. \\
+Secondly, vector different is calculated based on node\_id and component\_id. So hash index on node\_id column should help because there is a node\_id = component\_id condition in the sql. \\
+Initially, we tried btree index on GM\_CON\_COMP.component\_id. It does improve the performance. Then we add hash index on GM\_CON\_COMP.node\_id. It turns out that the performance is improved again. After that, we tried to add hash index on the temp table and GM\_TABLE\_UNDIRECT table's columns. But the enhancement is not obvious. \\
+So the 2 indices do work is btree on GM\_CON\_COMP.component\_id and hash on GM\_CON\_COMP.node\_id. For the first one, it mainly improves MAX() function. For the second one, it improves the "where" condition in sqls. After these 2 are added, other additional indices only increasing overhead instead of shorten the running time. \\
+\\
+\scalebox{0.6}{
+\begin{tabular}{  | l | c | c | c | c | c | } \hline
+\textbf{Index} & \textbf{p2p-Gnutella31.txt} & \textbf{as-skitter.75000.txt}  & \textbf{ca-AstroPh.txt} & \textbf{email-EuAll.txt}& \textbf{cit-HepTh.txt} \\ \hline
+None & 53.51399302 & 119.4098661 & 50.50897098 & 123.9283819 & 41.17333102 \\ \hline
+component\_id(btree) & 36.13925004 & 122.898526 & 39.09370708 & 149.132715 & 26.45658684 \\ \hline
+component\_id(btree), node\_id(hash) & 25.45816708 & 86.28342104 & 22.88536716 & 125.9463222 & 27.85415602 \\ \hline
+component\_id(btree), node\_id(btree) & 38.65054893 & 117.9664488 & 32.99039006 & 155.06496 & 31.62352514 \\ \hline
+component\_id(btree), node\_id(hash), temp.node\_id(hash) & 40.20039201 & 109.426384 & 28.04028392 & 133.7669752 & 30.60440493 \\ \hline
+component\_id(hash), node\_id(hash) & 26.92220187 & 90.23280811 & 24.43618298 & 210.5891101 & 29.8577292 \\ \hline
+component\_id(btree), node\_id(hash), link\_table\_name.dst\_id(hash)  & 28.92120504 & 83.67425203 & 26.90488887 & 138.1120729 & 30.00807405 \\ \hline
+\end{tabular}}\\
+
+\subsubsection{Eigenvalue computation (via Lanczos-SO and QR algorithms)}
+
+Index of columns in "WHERE" condition can help MySQL speed up value comparison in join operation. Therefore, we found that there are 7 possible positions to add index: G.row\_id + G.col\_id, Q.row\_id + Q.col\_id, R.row\_id + R.col\_id, Eval.row\_id + Eval.col\_id, next\_basis\_vect.id, basis\_vect\_0.id, and basis\_vect\_1.id. 
+\\
+According to experiment result, we found that adding B-tree index on Eval.row\_id and Eval.col\_id improved the performance best. We also tried many index combinations, but the performance did not increase. Therefore, we decided to add B-tree index on index on Eval.row\_id and Eval.col\_id  for Eigenvalue computation algorithm.
+
+\begin{center}
+\scalebox{0.6}{
+  \begin{tabular}{ |l | c | c | c | c | c | c | c |  }
+    \hline
+    \textbf{Index Type} & \textbf{Index column} & \textbf{p2p-Gnutella31} & \textbf{ca-AstroPh} & \textbf{email-EuAll} & \textbf{cit-HepTh} & \textbf{as-skitter.75000} &  \textbf{Improvement} \\ \hline
+No cache & & 432.941635 & 42.247019 & 87.824524 & 34.531853 & 92.089166 & (baseline) \\ \hline
+Hash & G.row\_id + G.col\_id & 183.792917 & 35.275701 & 76.680822 & 25.106503 & 83.686243 & 24.631\% \\ \hline
+Btree & G.row\_id + G.col\_id & 212.340946 & 38.845005 & 95.304085 & 37.262694 & 137.772463 & -1.405\% \\ \hline
+Hash & Q.row\_id + Q.col\_id & 321.794434 & 28.335948 & 84.675914 & 37.241847 & 139.774482 & 0.511\% \\ \hline
+Btree & Q.row\_id + Q.col\_id & 200.10483 & 28.930667 & 78.577032 & 34.081588 & 118.320216 & 13.729\% \\ \hline
+Hash & R.row\_id + R.col\_id & 372.464409 & 41.754213 & 93.040661 & 34.649986 & 133.050895 & -7.125\% \\ \hline
+Btree & R.row\_id + R.col\_id & 282.987124 & 20.351836 & 56.000463 & 24.621752 & 72.129375 & 34.614\% \\ \hline
+Hash & Eval.row\_id + Eval.col\_id & 373.817489 & 18.063141 & 60.053821 & 22.454597 & 80.1502 & 30.091\% \\ \hline
+Btree & Eval.row\_id + Eval.col\_id & 66.592785 & 21.696901 & 58.072773 & 28.105395 & 99.974783 & 35.436\% \\ \hline
+Hash & next\_basis\_vect.id & 683.642889 & 29.47404 & 87.384114 & 34.857184 & 81.874648 & -3.404\% \\ \hline
+Btree & next\_basis\_vect.id & 176.668195 & 22.145417 & 68.57327 & 38.863949 & 87.817504 & 24.157\% \\ \hline
+Hash & basis\_vect\_0.id & 177.532078 & 41.937022 & 93.3785 & 39.510948 & 112.020925 & 3.468\% \\ \hline
+Btree & basis\_vect\_0.id & 648.983299 & 20.541444 & 64.786556 & 25.261349 & 86.658346 & 12.090\% \\ \hline
+Hash & basis\_vect\_1.id & 137.220548 & 21.072826 & 76.711587 & 26.999191 & 96.576688 & 29.603\% \\ \hline
+Btree & basis\_vec\_1.id & 809.867548 & 26.501674 & 72.516903 & 27.561787 & 91.58051 & -2.325\% \\ \hline
+  \end{tabular}}
+\end{center}
+
+\subsubsection{Triangle count}
+
+This query is fully based on eigen value. And the aggregate function needs to go through all data. So index will not help.\\
+\\
+\scalebox{0.6}{
+\begin{tabular}{ | l | c | c | c | c | c | } \hline
+\textbf{Index }& \textbf{p2p-Gnutella31.txt} & \textbf{as-skitter.75000.txt}  & \textbf{ca-AstroPh.txt} & \textbf{email-EuAll.txt} & \textbf{cit-HepTh.txt} \\ \hline
+None  & 0.000257969 & 0.000259876 & 0.000265121 & 0.00028801 & 0.000248194 \\ \hline
+\end{tabular}} \\
+
+\subsubsection{K-core algorithm}
+
+Index of columns in "WHERE" condition can help MySQL speed up value comparison in join operation. Therefore, we found that there are 3 possible positions to add index: temp\_degree\_table.in\_degree, temp\_degree\_table.node\_id, and temp\_link\_table.src\_id.
+\\
+We tried all possible ways to add index on columns related to K-core algorithm; however, the experiment result showed that there was no significant improvement on executing time. Therefore, we decided not to add indices for K-core algorithm.
+
+\begin{center}
+\scalebox{0.6}{
+  \begin{tabular}{ |l | c | c | c | c | c | c | c |  }
+    \hline
+    \textbf{Index Type} & \textbf{Index column} & \textbf{p2p-Gnutella31} & \textbf{ca-AstroPh} & \textbf{email-EuAll} & \textbf{cit-HepTh} & \textbf{as-skitter.75000} &  \textbf{Improvement} \\ \hline
+No cache & & 21.567541 & 35.087091 & 20.816424 & 80.608768 & 9.386785 & (baseline) 	 \\ \hline
+Btreee & temp\_degree\_table.in\_degree & 30.652811 & 40.340461 & 23.426685 & 84.497394 & 6.604104 & -8.963\% \\ \hline
+Hash & temp\_degree\_table.in\_degree & 28.243504 & 46.542064 & 32.58452 & 82.191118 & 13.88069 & -33.994\% \\ \hline
+Btree & temp\_degree\_table.node\_id & 21.663131 & 37.245953 & 26.681098 & 103.65769 & 12.660117 & -19.646\% \\ \hline
+Hash & temp\_degree\_table.node\_id & 21.885152 & 32.91817 & 25.688136 & 77.51908 & 6.447193 & 3.290\% \\ \hline
+Btree & temp\_link\_table.src\_id & 21.244998 & 46.501597 & 25.201246 & 86.955264 & 7.053383 & -7.023\% \\ \hline
+Hash & temp\_link\_table.src\_id & 22.742343 & 40.598984 & 22.920802 & 90.440895 & 9.410922 & -8.743\% \\ \hline
+  \end{tabular}}
+\end{center}
+
+
+\subsubsection{Overall Validation}
+Next, we tested on several graphs about these indices. Some of them are sample graphs, some are new graphs for validating.\\
+Most graph's processing time is shortened.\\
+Notice that  there is one graph's processing time becomes longer after we add indices. This might caused by the overhead for building the index on this graph. \\
+\\
+\scalebox{0.8}{
+\begin{tabular}{ | l | c | c | c | c | c | } \hline
+\textbf{With indices or not} & \textbf{ca-AstroPh} & \textbf{cit-HepTh} & \textbf{email-EuAll} & \textbf{p2p-Gnutella31} & \textbf{soc-Slashdot0811} \\ \hline
+Run time with no indices & 2m34.348s & 3m6.760s & 8m34.530s & 6m58.804s & 6m33.274s\\ \hline
+Run time with indices   & 1m50.844s & 5m7.181s & 7m27.525s & 5m22.789s & 4m7.349s \\ \hline
+\end{tabular}}\\
+
+
