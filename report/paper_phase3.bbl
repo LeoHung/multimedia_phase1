@@ -1,0 +1,44 @@
+\begin{thebibliography}{1}
+
+\bibitem{AlvarezHamelin:2005vc}
+Jos{\'e}~Ignacio Alvarez-Hamelin, Luca Dall'Asta, Alain Barrat, and Alessandro
+  Vespignani.
+\newblock {k-core decomposition: a tool for the visualization of large scale
+  networks}.
+\newblock {\em arXiv.org}, April 2005.
+
+\bibitem{Kang:2011vk}
+U~Kang, Brendan Meeder, and Christos Faloutsos.
+\newblock {Spectral analysis for billion-scale graphs: discoveries and
+  implementation}.
+\newblock In {\em PAKDD'11: Proceedings of the 15th Pacific-Asia conference on
+  Advances in knowledge discovery and data mining}. Springer-Verlag, May 2011.
+
+\bibitem{Kang:2012vv}
+U~Kang, Hanghang Tong, Jimeng Sun, Ching-Yung Lin, and Christos Faloutsos.
+\newblock {gbase: an efficient analysis platform for large graphs}.
+\newblock {\em The VLDB Journal --- The International Journal on Very Large
+  Data Bases}, 21(5), October 2012.
+
+\bibitem{Kang:2011jg}
+U~Kang, Charalampos~E Tsourakakis, Ana~Paula Appel, Christos Faloutsos, and
+  Jure Leskovec.
+\newblock {HADI: Mining Radii of Large Graphs}.
+\newblock {\em Transactions on Knowledge Discovery from Data (TKDD}, 5(2),
+  February 2011.
+
+\bibitem{Kang:2011ve}
+U~Kang, Charalampos~E Tsourakakis, and Christos Faloutsos.
+\newblock {Pegasus: mining peta-scale graphs}.
+\newblock {\em Knowledge and information systems}, 27(2):303--325, 2011.
+
+\bibitem{Koutra:2011wa}
+Danai Koutra, Tai-You Ke, U~Kang, Duen~Horng Chau, Hsing-Kuo~Kenneth Pao, and
+  Christos Faloutsos.
+\newblock {Unifying guilt-by-association approaches: theorems and fast
+  algorithms}.
+\newblock In {\em ECML PKDD'11: Proceedings of the 2011 European conference on
+  Machine learning and knowledge discovery in databases}. Springer-Verlag,
+  September 2011.
+
+\end{thebibliography}
