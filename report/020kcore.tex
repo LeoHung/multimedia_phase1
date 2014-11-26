@@ -1,4 +1,27 @@
-We modified some origin code in gm\_main.py, making some methods can be assigned specific source table and dest table, so our k\_core function can utilize existing functions. The main code of k-cores algorithm is shown below.
+
+K-core is the groups in which the members linked into more than K other members. As K increases, the K-core group indicates that the members are highly connected, which are usually the cores of the graph. 
+\\
+To detect K-core, we developed a iterative algorithm to detect K-core groups. We also modified some origin code in gm\_main.py, making some methods can be assigned specific source table and dest table, so our k\_core function can utilize existing functions. 
+
+\begin{algorithm}[htb]
+  \caption{ K-core detection}
+  \label{alg:Framwork}
+  \begin{algorithmic}[1]
+    \Require G: A graph G = {V, E}, where V is the set of nodes, and E is the set of edges. K: The parameter of K-core. A member in a K-core links to at least K other same group members. 
+    \Ensure The node ids with corresponding K-core id
+    \State Initializing a temp graph as the original graph G
+    \State Calculating the degree of temp graph 
+    \State Removing the nodes whose degree less than K
+    \State If there are nodes deleted in the previous step, go to Step 2; otherwise, continue to the next step.
+    \State Applying weakly connected component algorithms to temp graph to find K-core
+    \\
+    \Return K-core groups;
+  \end{algorithmic}
+\end{algorithm}
+
+\clearpage
+
+The main code of k-cores algorithm is shown below.
 
 \begin{lstlisting}
 def get_row_count(table):

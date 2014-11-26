@@ -9,6 +9,11 @@
 \usepackage{grffile}
 
 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{epsfig}
+
 % christos: these look closer to NSF specs\dots
 \setlength{\oddsidemargin}{0.0in}
 \setlength{\evensidemargin}{0.0in}
@@ -25,6 +30,10 @@
 
 \begin{document}
 
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}  % Use Input in the format of Algorithm
+\renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm
+ 
 \newcommand{\beq}{\begin{equation}}
 \newcommand{\eeq}{\end{equation}}
 \newcommand{\bit}{\begin{itemize*}}
