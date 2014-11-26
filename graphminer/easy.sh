@@ -7,7 +7,7 @@ delim=$5
 echo $1, $2, $3, $4, \'$5\'
 
 if [ $1 ] && [ $2 ] && [ $3 ] && [ $4 ]; then
-    python graphminer/gm_main.py --file ${input_file} ${direction} --dest_dir ${output_dir} --unweighted --k ${k} --delim "${delim}" ;
+    python gm_main.py --file ${input_file} ${direction} --dest_dir ${output_dir} --unweighted --k ${k} --delim "${delim}" ;
 else  
     echo "Please enter the command as following: "
     echo "./easy.sh {input_file} {output_dir} {direction} {k} {delim}"
