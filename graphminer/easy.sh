@@ -11,4 +11,5 @@ if [ $1 ] && [ $2 ] && [ $3 ] && [ $4 ]; then
 else  
     echo "Please enter the command as following: "
     echo "./easy.sh {input_file} {output_dir} {direction} {k} {delim}"
+    echo "e.g. ./easy.sh unitTest/cc-all-separate.txt output --undirected 5 ','"
 fi
