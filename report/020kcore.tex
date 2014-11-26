@@ -1,7 +1,9 @@
 
-K-core is the groups in which the members linked into more than K other members. As K increases, the K-core group indicates that the members are highly connected, which are usually the cores of the graph. 
+K-core is the groups in which the members linked into more than K other members. As K increases, the K-core groups become more highly connected, which are usually the cores of the graph. 
 \\
-To detect K-core, we developed a iterative algorithm to detect K-core groups. We also modified some origin code in gm\_main.py, making some methods can be assigned specific source table and dest table, so our k\_core function can utilize existing functions. 
+We provided K-core detection in gm\_main.py. User can set --k to denote the parameter K in gm\_main.py. After executing gm\_main.py, it will generate K-core result to the output directory.
+\\
+To detect K-core, we developed an iterative algorithm to detect K-core groups. We also modified some origin code in gm\_main.py, making some methods can be assigned specific source table and dest table, so our k\_core function can utilize existing functions. 
 
 \begin{algorithm}[htb]
   \caption{ K-core detection}
