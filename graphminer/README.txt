@@ -1,5 +1,12 @@
 Graph Miner
 ============
+New features:
+
+1. We added indexs into gm_main.py to speed up. 
+2. We added K-core detection algorithm in Graph Miner. Please check the section
+   "K-cores Manual and Implementation" in report.pdf for details.
+3. We provided friendly script for analysis, "easy.sh", and unit test, "make test".
+============
 usage: gm_main.py [-h] --file INPUT_FILE [--delim DELIMITER] [--unweighted]
                   [--undirected] --dest_dir DEST_DIR
                   [--belief_file BELIEF_FILE]
@@ -36,6 +43,8 @@ optional arguments:
                         delimiter with --delim option. The prior beliefs are
                         expected to be centered around 0. i.e. positive nodes
                         have priors >0, negative nodes <0 and unknown nodes 0.
+  --k K
+                        The K parameter for k-core detection algorithm.
 
 STEPS TO RUN
 ============
@@ -51,10 +60,7 @@ Run 'make install'
 permission for the output directory
 
 4. The command to run the sample file:
-python gm_main.py --file C:\Users\XD\Desktop\CMU_Courses\Projects\DM\Package\samplegraph.txt 
---dest_dir C:\Users\XD\Desktop\CMU_Courses\Projects\DM\Package\output 
---belief_file C:\Users\XD\Desktop\CMU_Courses\Projects\DM\Package\priorsbelief.txt 
---unweighted --undirected 
+./easy.sh unitTest/cc-all-separate.txt output --undirected 5 ','  
 
 or run 'make'
 

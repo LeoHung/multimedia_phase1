@@ -1011,7 +1011,7 @@ def main():
         gm_pagerank(num_nodes)                                  # Pagerank
         gm_connected_components(num_nodes)                      # Connected components
         gm_eigen(gm_param_eig_max_iter, num_nodes, gm_param_eig_thres1, gm_param_eig_thres2)
-        #gm_all_radius(num_nodes)
+        gm_all_radius(num_nodes)
         if (args.belief_file):
             gm_belief_propagation(args.belief_file, args.delimiter, args.undirected)
 

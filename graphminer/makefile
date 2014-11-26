@@ -1,4 +1,4 @@
-all: plot
+all: test
 
 install:
 	sudo apt-get install python-psycopg2
@@ -17,7 +17,6 @@ test:
 	mkdir -p `pwd`/output/circle
 	mkdir -p `pwd`/output/clique
 	mkdir -p `pwd`/output/dd-1-10node-undirect
-	mkdir -p `pwd`/output/dd-2-star-direct
 	mkdir -p `pwd`/output/k-core1-10node
 	mkdir -p `pwd`/output/k-core2-all-connected
 	mkdir -p `pwd`/output/twin_node
@@ -27,7 +26,6 @@ test:
 	python gm_main.py --file `pwd`/test_case/circle.txt  --dest_dir `pwd`/output/circle --unweighted --undirected --k 2
 	python gm_main.py --file `pwd`/test_case/clique.txt --dest_dir `pwd`/output/clique --unweighted --undirected --k 2
 	python gm_main.py --file `pwd`/test_case/dd-1-10node-undirect.txt --dest_dir `pwd`/output/dd-1-10node-undirect --unweighted --undirected --k 5
-	python gm_main.py --file `pwd`/test_case/dd-2-star-direct.txt --dest_dir `pwd`/output/dd-2-star-direct --unweighted --k 2
 	python gm_main.py --file `pwd`/test_case/k-core1-10node.txt --dest_dir `pwd`/output/k-core1-10node --unweighted --undirected --k 2
 	python gm_main.py --file `pwd`/test_case/k-core2-all-connected.txt --dest_dir `pwd`/output/k-core2-all-connected --unweighted --undirected --k 4
 	python gm_main.py --file `pwd`/test_case/twin_node.txt --dest_dir `pwd`/output/twin_node --unweighted --undirected --k 1
@@ -39,7 +37,6 @@ plot: test
 	matlab -nodisplay -nosplash -nodesktop -r "cd matlab; plotGM('../output/circle');exit;"
 	matlab -nodisplay -nosplash -nodesktop -r "cd matlab; plotGM('../output/clique');exit;"
 	matlab -nodisplay -nosplash -nodesktop -r "cd matlab; plotGM('../output/dd-1-10node-undirect');exit;"
-	matlab -nodisplay -nosplash -nodesktop -r "cd matlab; plotGM('../output/dd-2-star-direct');exit;"
 	matlab -nodisplay -nosplash -nodesktop -r "cd matlab; plotGM('../output/k-core1-10node');exit;"
 	matlab -nodisplay -nosplash -nodesktop -r "cd matlab; plotGM('../output/k-core2-all-connected');exit;"
 	matlab -nodisplay -nosplash -nodesktop -r "cd matlab; plotGM('../output/twin_node');exit;"
